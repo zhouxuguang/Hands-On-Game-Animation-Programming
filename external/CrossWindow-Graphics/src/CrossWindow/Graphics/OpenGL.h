@@ -727,7 +727,7 @@ inline void swapBuffers(const OpenGLState& state)
 #if defined(XWIN_WIN32)
     SwapBuffers(state.hdc);
 #elif defined(XWIN_COCOA) || defined(XWIN_UIKIT)
-	glFlush();
+	//glFlush();
 	CGLFlushDrawable(state.cglContext);
 #elif defined(XWIN_XLIB)
     glXSwapBuffers(state.x11.display, state.context.glx.window);

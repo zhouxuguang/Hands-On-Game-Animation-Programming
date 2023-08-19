@@ -45,7 +45,7 @@ class Window
     // Set the type of this window's view layer
     void setLayer(LayerType type);
 
-  protected:
+public:
     // NSString*
     void* mTitle;
 

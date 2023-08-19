@@ -9,7 +9,10 @@
 #define Util_h
 
 #include <stdio.h>
+#include <stdint.h>
 
 void *getApplication();
+
+uint64_t GetTickCount();
 
 #endif /* Util_h */
