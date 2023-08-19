@@ -6,15 +6,15 @@
 #include "quat.h"
 #include "mat4.h"
 
-template Uniform<int>;
-template Uniform<ivec4>;
-template Uniform<ivec2>;
-template Uniform<float>;
-template Uniform<vec2>;
-template Uniform<vec3>;
-template Uniform<vec4>;
-template Uniform<quat>;
-template Uniform<mat4>;
+//template Uniform<int>;
+//template Uniform<ivec4>;
+//template Uniform<ivec2>;
+//template Uniform<float>;
+//template Uniform<vec2>;
+//template Uniform<vec3>;
+//template Uniform<vec4>;
+//template Uniform<quat>;
+//template Uniform<mat4>;
 
 #define UNIFORM_IMPL(gl_func, tType, dType) \
 template<> \

@@ -5,13 +5,13 @@
 #include "vec4.h"
 #include "quat.h"
 
-template Attribute<int>;
-template Attribute<float>;
-template Attribute<vec2>;
-template Attribute<vec3>;
-template Attribute<vec4>;
-template Attribute<ivec4>;
-template Attribute<quat>;
+//template Attribute<int>;
+//template Attribute<float>;
+//template Attribute<vec2>;
+//template Attribute<vec3>;
+//template Attribute<vec4>;
+//template Attribute<ivec4>;
+//template Attribute<quat>;
 
 template<typename T>
 Attribute<T>::Attribute() {

@@ -4,10 +4,55 @@
 #include "Uniform.h"
 #include "Draw.h"
 
+static std::string vertexShader = R"(#version 410 core
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+layout (location=0) in vec3 position;
+layout (location=1) in vec3 normal;
+layout (location=2) in vec2 texCoord;
+
+out vec3 fragPos;
+out vec3 norm;
+out vec2 uv;
+
+void main() {
+    gl_Position = projection * view * model * vec4(position, 1.0);
+    
+    fragPos = vec3(model * vec4(position, 1.0));
+    norm = vec3(model * vec4(normal, 0.0f));
+    uv = texCoord;
+}
+)";
+
+static std::string fragmentShader = R"(#version 410 core
+
+in vec3 fragPos;
+in vec3 norm;
+in vec2 uv;
+
+uniform vec3 light;
+uniform sampler2D tex0;
+
+layout(location=0) out vec4 FragColor;
+
+void main() {
+    vec4 diffuseColor = texture(tex0, uv);
+
+    vec3 n = normalize(norm);
+    vec3 l = normalize(light);
+    float diffuseIntensity = clamp(dot(n, l) + 0.1, 0, 1);
+
+    FragColor = diffuseColor * diffuseIntensity;
+})";
+
 void Sample::Initialize() {
 	mRotation = 0.0f;
-	mShader = new Shader("Shaders/static.vert", "Shaders/lit.frag");
-	mDisplayTexture = new Texture("Assets/uv.png");
+	mShader = new Shader();
+    mShader->LoadFromSource(vertexShader, fragmentShader);
+	mDisplayTexture = new Texture("/Users/zhouxuguang/work/source/study/Hands-On-Game-Animation-Programming/Chapter06/Sample01/Assets/uv.png");
 
 	mVertexPositions = new Attribute<vec3>();
 	mVertexNormals = new Attribute<vec3>();

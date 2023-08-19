@@ -27,6 +27,8 @@ public:
 	~Shader();
 
 	void Load(const std::string& vertex, const std::string& fragment);
+    
+    void LoadFromSource(const std::string& vertex, const std::string& fragment);
 
 	void Bind();
 	void UnBind();

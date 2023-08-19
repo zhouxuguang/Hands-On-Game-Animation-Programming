@@ -1,5 +1,5 @@
 #include "IndexBuffer.h"
-#include "glad.h"
+#include "PreDefine.h"
 
 IndexBuffer::IndexBuffer() {
 	glGenBuffers(1, &mHandle);
