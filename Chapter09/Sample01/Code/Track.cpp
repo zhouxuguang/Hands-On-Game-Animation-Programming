@@ -1,8 +1,6 @@
 #include "Track.h"
+#include <math.h>
 
-template Track<float, 1>;
-template Track<vec3, 3>;
-template Track<quat, 4>;
 
 namespace TrackHelpers {
 	inline float Interpolate(float a, float b, float t) {
@@ -240,3 +238,8 @@ T Track<T, N>::SampleCubic(float time, bool looping) {
 
 	return Hermite(t, point1, slope1, point2, slope2);
 }
+
+//这个显式实例化要放在类模板函数的最后
+template class Track<float, 1>;
+template class Track<vec3, 3>;
+template class Track<quat, 4>;
