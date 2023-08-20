@@ -8,6 +8,7 @@
 #include "Util.h"
 #import <AppKit/AppKit.h>
 #include <mach/mach_time.h>
+#include <CoreGraphics/CoreGraphics.h>
 
 void *getApplication()
 {
@@ -27,4 +28,21 @@ uint64_t GetTickCount()
     uint64_t elapsedTime = currentTime * timebase.numer / timebase.denom / 1000000;
     
     return elapsedTime;
+}
+
+float GetDevicePixelRatio()
+{
+    // 获取主显示器的屏幕 ID
+    CGDirectDisplayID displayId = kCGDirectMainDisplay;
+  
+    // 获取设备像素比例
+    CGDisplayModeRef mode = CGDisplayCopyDisplayMode(displayId);
+    CGFloat pixelWidth = CGDisplayModeGetPixelWidth(mode);
+    CGFloat width = CGDisplayModeGetWidth(mode);
+  
+    float devicePixelRatio = pixelWidth / width;
+  
+    CGDisplayModeRelease(mode);
+
+    return devicePixelRatio;
 }

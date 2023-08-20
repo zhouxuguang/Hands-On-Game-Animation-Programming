@@ -15,4 +15,6 @@ void *getApplication();
 
 uint64_t GetTickCount();
 
+float GetDevicePixelRatio();
+
 #endif /* Util_h */

@@ -50,6 +50,9 @@ int main(int argc, const char** argv)
     
     uint64_t lastTick = GetTickCount();
 
+    //获得屏幕像素比例
+    float pixelRatio = GetDevicePixelRatio();
+
     while (isRunning)
     {
         // ♻️ Update the event queue
@@ -64,15 +67,15 @@ int main(int argc, const char** argv)
         }
         if (gApplication != 0)
         {
-            int clientWidth = windowDesc.width;
-            int clientHeight = windowDesc.height;
+            int clientWidth = windowDesc.width * pixelRatio;
+            int clientHeight = windowDesc.height * pixelRatio;
             glViewport(0, 0, clientWidth, clientHeight);
             glEnable(GL_DEPTH_TEST);
             glEnable(GL_CULL_FACE);
             glPointSize(5.0f);
             glBindVertexArray(gVertexArrayObject);
 
-            glClearColor(0.5f, 0.0f, 0.0f, 1.0f);
+            glClearColor(0.5f, 0.6f, 0.7f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
             float aspect = (float)clientWidth / (float)clientHeight;
