@@ -1,4 +1,5 @@
 #include "Clip.h"
+#include <math.h>
 
 Clip::Clip() {
 	mName = "No name given";
