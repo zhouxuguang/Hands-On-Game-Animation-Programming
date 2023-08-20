@@ -1,6 +1,7 @@
 #ifndef _H_TRACK_
 #define _H_TRACK_
 
+#include <math.h>
 #include <vector>
 #include "Frame.h"
 #include "vec3.h"

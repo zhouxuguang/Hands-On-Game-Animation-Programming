@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Shader.h"
-#include "glad.h"
+#include "PreDefine.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -172,6 +172,16 @@ void Shader::Load(const std::string& vertex, const std::string& fragment) {
 		PopulateAttributes();
 		PopulateUniforms();
 	}
+}
+
+void Shader::LoadFromSource(const std::string& vertex, const std::string& fragment)
+{
+    unsigned int v_shader = CompileVertexShader(vertex);
+    unsigned int f_shader = CompileFragmentShader(fragment);
+    if (LinkShaders(v_shader, f_shader)) {
+        PopulateAttributes();
+        PopulateUniforms();
+    }
 }
 
 void Shader::Bind() {
