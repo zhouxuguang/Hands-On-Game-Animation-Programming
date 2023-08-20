@@ -3,7 +3,7 @@
 #include "GLTFLoader.h"
 
 void Sample::Initialize() {
-	cgltf_data* gltf = LoadGLTFFile("Assets/Woman.gltf");
+	cgltf_data* gltf = LoadGLTFFile("../../../Chapter09/Sample01/Assets/Woman.gltf");
 	mRestPose = LoadRestPose(gltf);
 	mClips = LoadAnimationClips(gltf);
 	FreeGLTFFile(gltf);

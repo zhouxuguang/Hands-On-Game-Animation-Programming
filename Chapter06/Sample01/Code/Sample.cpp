@@ -52,7 +52,7 @@ void Sample::Initialize() {
 	mRotation = 0.0f;
 	mShader = new Shader();
     mShader->LoadFromSource(vertexShader, fragmentShader);
-	mDisplayTexture = new Texture("/Users/zhouxuguang/work/source/study/Hands-On-Game-Animation-Programming/Chapter06/Sample01/Assets/uv.png");
+	mDisplayTexture = new Texture("../../../Chapter06/Sample01/Assets/uv.png");
 
 	mVertexPositions = new Attribute<vec3>();
 	mVertexNormals = new Attribute<vec3>();
