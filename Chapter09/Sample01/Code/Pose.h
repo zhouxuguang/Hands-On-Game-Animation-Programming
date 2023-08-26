@@ -4,7 +4,7 @@
 #include <vector>
 #include "Transform.h"
 
-//动画姿势类，每个关节可能有多个骨骼，所以是数组
+//动画姿势类
 class Pose
 {
 protected:

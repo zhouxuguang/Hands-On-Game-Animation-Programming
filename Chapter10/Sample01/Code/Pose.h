@@ -4,10 +4,12 @@
 #include <vector>
 #include "Transform.h"
 
-class Pose {
+//动画姿势类，每个关节可能有多个骨骼，所以是数组
+class Pose
+{
 protected:
-	std::vector<Transform> mJoints;
-	std::vector<int> mParents;
+	std::vector<Transform> mJoints;   //关节的数组
+	std::vector<int> mParents;        //父节点数组，存储编号
 public:
 	Pose();
 	Pose(const Pose& p);

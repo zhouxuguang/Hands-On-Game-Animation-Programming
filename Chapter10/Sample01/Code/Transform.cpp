@@ -2,7 +2,8 @@
 #include <cmath>
 #include <iostream>
 
-Transform combine(const Transform& a, const Transform& b) {
+Transform combine(const Transform& a, const Transform& b)
+{
 	Transform out;
 
 	out.scale = a.scale * b.scale;
@@ -14,7 +15,8 @@ Transform combine(const Transform& a, const Transform& b) {
 	return out;
 }
 
-Transform inverse(const Transform& t) {
+Transform inverse(const Transform& t)
+{
 	Transform inv;
 
 	inv.rotation = inverse(t.rotation);
@@ -29,7 +31,8 @@ Transform inverse(const Transform& t) {
 	return inv;
 }
 
-Transform mix(const Transform& a, const Transform& b, float t) {
+Transform mix(const Transform& a, const Transform& b, float t)
+{
 	quat bRot = b.rotation;
 	if (dot(a.rotation, bRot) < 0.0f) {
 		bRot = -bRot;
@@ -50,7 +53,8 @@ bool operator!=(const Transform& a, const Transform& b) {
 	return !(a == b);
 }
 
-mat4 transformToMat4(const Transform& t) {
+mat4 transformToMat4(const Transform& t)
+{
 	// First, extract the rotation basis of the transform
 	vec3 x = t.rotation * vec3(1, 0, 0);
 	vec3 y = t.rotation * vec3(0, 1, 0);
@@ -73,7 +77,8 @@ mat4 transformToMat4(const Transform& t) {
 	);
 }
 
-Transform mat4ToTransform(const mat4& m) {
+Transform mat4ToTransform(const mat4& m)
+{
 	Transform out;
 
 	out.position = vec3(m.v[12], m.v[13], m.v[14]);
