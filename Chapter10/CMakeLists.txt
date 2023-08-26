@@ -62,3 +62,66 @@ target_link_libraries(
 	CrossWindowGraphics
 	${OPENGL_LIBRARIES}
 )
+
+set(chapter10_2_SOURCES
+	Sample02/Code/XMain.mm
+	Sample02/Code/Util.mm
+    Sample02/Code/Application.h
+    Sample02/Code/Attribute.h
+    Sample02/Code/Attribute.cpp
+    Sample02/Code/Draw.h
+    Sample02/Code/Draw.cpp
+    Sample02/Code/glad.h
+    Sample02/Code/glad.c
+    Sample02/Code/IndexBuffer.h
+    Sample02/Code/IndexBuffer.cpp
+    Sample02/Code/mat4.h
+    Sample02/Code/mat4.cpp
+    Sample02/Code/quat.h
+    Sample02/Code/quat.cpp
+    Sample02/Code/Shader.h
+    Sample02/Code/Shader.cpp
+    Sample02/Code/stb_image.h
+    Sample02/Code/stb_image.cpp
+    Sample02/Code/Texture.h
+    Sample02/Code/Texture.cpp
+    Sample02/Code/Transform.h
+    Sample02/Code/Transform.cpp
+    Sample02/Code/TransformTrack.h
+    Sample02/Code/TransformTrack.cpp
+    Sample02/Code/Uniform.h
+    Sample02/Code/Uniform.cpp
+    Sample02/Code/vec2.h
+    Sample02/Code/vec3.h
+    Sample02/Code/vec3.cpp
+    Sample02/Code/vec4.h
+    Sample02/Code/cgltf.h
+    Sample02/Code/cgltf.c
+    Sample02/Code/DebugDraw.h
+    Sample02/Code/DebugDraw.cpp
+    Sample02/Code/Frame.h
+    Sample02/Code/GLTFLoader.h
+    Sample02/Code/GLTFLoader.cpp
+    Sample02/Code/Interpolation.h
+    Sample02/Code/Track.h
+    Sample02/Code/Track.cpp
+    Sample02/Code/Clip.h
+    Sample02/Code/Clip.cpp
+    Sample02/Code/Pose.h
+    Sample02/Code/Pose.cpp
+    Sample02/Code/Sample.h
+    Sample02/Code/Sample.cpp
+    Sample02/Code/Skeleton.cpp
+    Sample02/Code/Skeleton.h
+    Sample02/Code/Mesh.cpp
+    Sample02/Code/Mesh.h)
+
+add_executable(chapter10_2 ${chapter10_2_SOURCES})
+
+# 🔗 Link CrossWindow to your project:
+target_link_libraries(
+    chapter10_2
+    CrossWindow
+	CrossWindowGraphics
+	${OPENGL_LIBRARIES}
+)
