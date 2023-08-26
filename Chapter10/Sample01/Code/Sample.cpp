@@ -3,9 +3,9 @@
 #include "GLTFLoader.h"
 
 void Sample::Initialize() {
-	cgltf_data* gltf = LoadGLTFFile("Assets/Woman.gltf");
-	mSkeleton = LoadSkeleton(gltf);
-	mClips = LoadAnimationClips(gltf);
+	cgltf_data* gltf = LoadGLTFFile("../../../Chapter09/Sample01/Assets/Woman.gltf");
+	mSkeleton = LoadSkeleton(gltf);  //加载骨骼
+	mClips = LoadAnimationClips(gltf); //加载动画片段
 	FreeGLTFFile(gltf);
 
 	mRestPoseVisual = new DebugDraw();
