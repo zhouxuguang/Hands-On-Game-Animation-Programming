@@ -151,18 +151,20 @@ void Mesh::CPUSkin(Skeleton& skeleton, Pose& pose) {
 	mSkinnedPosition.resize(numVerts);
 	mSkinnedNormal.resize(numVerts);
 
-	pose.GetMatrixPalette(mPosePalette);
-	std::vector<mat4> invPosePalette = skeleton.GetInvBindPose();
+	pose.GetMatrixPalette(mPosePalette);   //pose矩阵Palette
+	std::vector<mat4> invPosePalette = skeleton.GetInvBindPose(); //逆绑定矩阵Palette
 
 	for (unsigned int i = 0; i < numVerts; ++i) {
 		ivec4& j = mInfluences[i];
 		vec4& w = mWeights[i];
 
+        //分别计算每一个骨骼的影响矩阵
 		mat4 m0 = (mPosePalette[j.x] * invPosePalette[j.x]) * w.x;
 		mat4 m1 = (mPosePalette[j.y] * invPosePalette[j.y]) * w.y;
 		mat4 m2 = (mPosePalette[j.z] * invPosePalette[j.z]) * w.z;
 		mat4 m3 = (mPosePalette[j.w] * invPosePalette[j.w]) * w.w;
 
+        //计算最后的蒙皮矩阵
 		mat4 skin = m0 + m1 + m2 + m3;
 
 		mSkinnedPosition[i] = transformPoint(skin, mPosition[i]);
@@ -185,6 +187,8 @@ void Mesh::CPUSkin(Skeleton& skeleton, Pose& pose) {
 		ivec4& joint = mInfluences[i];
 		vec4& weight = mWeights[i];
 
+        //逆bindPose是指binding姿态下的矩阵，逆是指每个关节的变换矩阵，即从模型坐标系
+        //到关节坐标系的矩阵，然后乘以当前的姿势矩阵就将顶点从skin空间变换到模型空间
 		Transform skin0 = combine(pose[joint.x], inverse(bindPose[joint.x]));
 		vec3 p0 = transformPoint(skin0, mPosition[i]);
 		vec3 n0 = transformVector(skin0, mNormal[i]);
@@ -200,6 +204,8 @@ void Mesh::CPUSkin(Skeleton& skeleton, Pose& pose) {
 		Transform skin3 = combine(pose[joint.w], inverse(bindPose[joint.w]));
 		vec3 p3 = transformPoint(skin3, mPosition[i]);
 		vec3 n3 = transformVector(skin3, mNormal[i]);
+        
+        //4个受影响的骨骼计算完成后，对其进行加权平均，在模型空间中插值
 		mSkinnedPosition[i] = p0 * weight.x + p1 * weight.y + p2 * weight.z + p3 * weight.w;
 		mSkinnedNormal[i] = n0 * weight.x + n1 * weight.y + n2 * weight.z + n3 * weight.w;
 	}

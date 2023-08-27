@@ -6,7 +6,7 @@
 #include "glad.h"
 
 void Sample::Initialize() {
-	cgltf_data* gltf = LoadGLTFFile("../../../Chapter09/Sample01/Assets/Woman.gltf");
+	cgltf_data* gltf = LoadGLTFFile("../../../Chapter10/Sample02/Assets/Woman.gltf");
 	mCPUMeshes = LoadMeshes(gltf);
 	mSkeleton = LoadSkeleton(gltf);
 	mClips = LoadAnimationClips(gltf);
@@ -17,11 +17,11 @@ void Sample::Initialize() {
 		mGPUMeshes[i].UpdateOpenGLBuffers();
 	}
 
-	mStaticShader = new Shader("../../../Chapter09/Sample01/Shaders/static.vert",
-                               "../../../Chapter09/Sample01/Shaders/lit.frag");
-	mSkinnedShader = new Shader("../../../Chapter09/Sample01/Shaders/skinned.vert",
-                                "../../../Chapter09/Sample01/Shaders/lit.frag");
-	mDiffuseTexture = new Texture("../../../Chapter09/Sample01/Assets/Woman.png");
+	mStaticShader = new Shader("../../../Chapter10/Sample02/Shaders/static.vert",
+                               "../../../Chapter10/Sample02/Shaders/lit.frag");
+	mSkinnedShader = new Shader("../../../Chapter10/Sample02/Shaders/skinned.vert",
+                                "../../../Chapter10/Sample02/Shaders/lit.frag");
+	mDiffuseTexture = new Texture("../../../Chapter10/Sample02/Assets/Woman.png");
 
 	mGPUAnimInfo.mAnimatedPose = mSkeleton.GetRestPose();
 	mGPUAnimInfo.mPosePalette.resize(mSkeleton.GetRestPose().Size());
