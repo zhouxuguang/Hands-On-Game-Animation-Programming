@@ -38,6 +38,7 @@ int main(int argc, const char** argv)
     xgfx::setContext(state);
     
     const char* szVersion = (const char*)glGetString(GL_VERSION);
+    printf("opengl version = %s\n", szVersion);
 
     gApplication = new Sample();
     gApplication->Initialize();
@@ -71,6 +72,7 @@ int main(int argc, const char** argv)
             int clientHeight = windowDesc.height * pixelRatio;
             glViewport(0, 0, clientWidth, clientHeight);
             glEnable(GL_DEPTH_TEST);
+            glDepthFunc(GL_LESS);
             glEnable(GL_CULL_FACE);
             glPointSize(5.0f);
             glBindVertexArray(gVertexArrayObject);
