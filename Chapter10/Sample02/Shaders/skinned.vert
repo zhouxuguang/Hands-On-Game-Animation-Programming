@@ -25,7 +25,6 @@ void main() {
     skin += (pose[joints.y] *  invBindPose[joints.y]) * weights.y;
     skin += (pose[joints.z] * invBindPose[joints.z]) * weights.z;
     skin += (pose[joints.w] * invBindPose[joints.w]) * weights.w;
-    skin = mat4(1.0);
 
     //skin矩阵的作用是先将顶点用绑定矩阵逆矩阵变换到蒙皮空间，然后用姿势矩阵变换到当前姿势下的坐标
     //下面的这行矩阵乘法从右往左看
