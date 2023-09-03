@@ -142,6 +142,8 @@ bool Window::create(const WindowDesc& desc, EventQueue& eventQueue)
 
 	[w setContentView:(XWinView*)view];
 	[w makeKeyAndOrderFront:nsApp];
+    //[w makeKeyWindow];
+    [w orderFrontRegardless];
     //[w setLevel:NSNormalWindowLevel + 1];
 	
 	
