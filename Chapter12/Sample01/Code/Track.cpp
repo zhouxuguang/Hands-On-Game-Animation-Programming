@@ -1,12 +1,5 @@
 #include "Track.h"
-
-template Track<float, 1>;
-template Track<vec3, 3>;
-template Track<quat, 4>;
-
-template FastTrack<float, 1>;
-template FastTrack<vec3, 3>;
-template FastTrack<quat, 4>;
+#include <math.h>
 
 namespace TrackHelpers {
 	inline float Interpolate(float a, float b, float t) {
@@ -328,3 +321,11 @@ FastTrack<T, N> OptimizeTrack(Track<T, N>& input) {
 
 	return result;
 }
+
+template class Track<float, 1>;
+template class Track<vec3, 3>;
+template class Track<quat, 4>;
+
+template class FastTrack<float, 1>;
+template class FastTrack<vec3, 3>;
+template class FastTrack<quat, 4>;

@@ -4,7 +4,7 @@
 #include "Uniform.h"
 
 void Sample::Initialize() {
-	cgltf_data* gltf = LoadGLTFFile("Assets/Woman.gltf");
+	cgltf_data* gltf = LoadGLTFFile("../../../Chapter12/Sample01/Assets/Woman.gltf");
 	mSkeleton = LoadSkeleton(gltf);
 	mClips = LoadAnimationClips(gltf);
 	mMeshes = LoadMeshes(gltf);
@@ -14,8 +14,8 @@ void Sample::Initialize() {
 	mPose.GetMatrixPalette(mPosePalette);
 	mSkinPalette = mSkeleton.GetInvBindPose();
 
-	mShader = new Shader("Shaders/skinned.vert", "Shaders/lit.frag");
-	mTexture = new Texture("Assets/Woman.png");
+	mShader = new Shader("../../../Chapter12/Sample01/Shaders/skinned.vert", "../../../Chapter12/Sample01/Shaders/lit.frag");
+	mTexture = new Texture("../../../Chapter12/Sample01/Assets/Woman.png");
 
 	mA.mPose = mPose;
 	mB.mPose = mPose;
