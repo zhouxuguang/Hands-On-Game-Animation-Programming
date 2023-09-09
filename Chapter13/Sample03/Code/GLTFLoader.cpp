@@ -148,6 +148,7 @@ namespace GLTFHelpers {
 					(int)(values[index + 3] + 0.5f)
 				);
 
+                //转换为相对于节点数组的索引
 				joints.x = std::max(0, GetNodeIndex(skin->joints[joints.x], nodes, nodeCount));
 				joints.y = std::max(0, GetNodeIndex(skin->joints[joints.y], nodes, nodeCount));
 				joints.z = std::max(0, GetNodeIndex(skin->joints[joints.z], nodes, nodeCount));
@@ -156,7 +157,10 @@ namespace GLTFHelpers {
 				influences.push_back(joints);
 			}
 			break;
-			} // End switch statement
+                
+            default:
+                break;
+            } // End switch statement
 		}
 	}// End of MeshFromAttribute function
 
@@ -201,10 +205,12 @@ Pose LoadRestPose(cgltf_data* data) {
 
 	for (unsigned int i = 0; i < boneCount; ++i) {
 		cgltf_node* node = &(data->nodes[i]);
-
+        
+        //加载每个骨骼的局部变换
 		Transform transform = GLTFHelpers::GetLocalTransform(data->nodes[i]);
 		result.SetLocalTransform(i, transform);
 
+        //设置父节点的索引
 		int parent = GLTFHelpers::GetNodeIndex(node->parent, data->nodes, boneCount);
 		result.SetParent(i, parent);
 	}
@@ -264,34 +270,45 @@ std::vector<Clip> LoadAnimationClips(cgltf_data* data) {
 	return result;
 }
 
-Pose LoadBindPose(cgltf_data* data) {
+Pose LoadBindPose(cgltf_data* data)
+{
 	Pose restPose = LoadRestPose(data);
+    
+    //将每个关节的变换转换为世界空间中的变换，这个可以作为一个初始的姿势
 	unsigned int numBones = restPose.Size();
 	std::vector<Transform> worldBindPose(numBones);
 	for (unsigned int i = 0; i < numBones; ++i) {
 		worldBindPose[i] = restPose.GetGlobalTransform(i);
 	}
+    
+    //遍历每个蒙皮
 	unsigned int numSkins = (unsigned int)data->skins_count;
 	for (unsigned int i = 0; i < numSkins; ++i) {
+        
+        //读取所有关节的逆绑定变换矩阵
 		cgltf_skin* skin = &(data->skins[i]);
 		std::vector<float> invBindAccessor;
 		GLTFHelpers::GetScalarValues(invBindAccessor, 16, *skin->inverse_bind_matrices);
 
 		unsigned int numJoints = (unsigned int)skin->joints_count;
-		for (unsigned int j = 0; j < numJoints; ++j) {
-			// Read the ivnerse bind matrix of the joint
+		for (unsigned int j = 0; j < numJoints; ++j)
+        {
+			// 读取当前关节的逆绑定变换矩阵
 			float* matrix = &(invBindAccessor[j * 16]);
 			mat4 invBindMatrix = mat4(matrix);
-			// invert, convert to transform
+            
+			// 求逆并转换为变换
 			mat4 bindMatrix = inverse(invBindMatrix);
 			Transform bindTransform = mat4ToTransform(bindMatrix);
-			// Set that transform in the worldBindPose.
+            
+			// 设置当前节点的世界变换
 			cgltf_node* jointNode = skin->joints[j];
 			int jointIndex = GLTFHelpers::GetNodeIndex(jointNode, data->nodes, numBones);
 			worldBindPose[jointIndex] = bindTransform;
 		} // end for each joint
 	} // end for each skin
-	// Convert the world bind pose to a regular bind pose
+    
+	// 将世界绑定姿势转换为局部绑定姿势
 	Pose bindPose = restPose;
 	for (unsigned int i = 0; i < numBones; ++i) {
 		Transform current = worldBindPose[i];
@@ -331,11 +348,14 @@ std::vector<Mesh> LoadMeshes(cgltf_data* data) {
 
 			cgltf_primitive* primitive = &node->mesh->primitives[j];
 
+            //加载属性，例如顶点坐标、纹理坐标等
 			unsigned int numAttributes = (unsigned int)primitive->attributes_count;
 			for (unsigned int k = 0; k < numAttributes; ++k) {
 				cgltf_attribute* attribute = &primitive->attributes[k];
 				GLTFHelpers::MeshFromAttribute(mesh, *attribute, node->skin, nodes, nodeCount);
 			}
+            
+            //加载索引
 			if (primitive->indices != 0) {
 				unsigned int indexCount = (unsigned int)primitive->indices->count;
 				std::vector<unsigned int>& indices = mesh.GetIndices();

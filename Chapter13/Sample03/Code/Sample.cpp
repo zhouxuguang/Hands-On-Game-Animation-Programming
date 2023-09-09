@@ -2,7 +2,7 @@
 #include "Sample.h"
 #include "GLTFLoader.h"
 #include "Uniform.h"
-#include "glad.h"
+#include "PreDefine.h"
 #include "Blending.h"
 #include <iostream>
 
@@ -119,21 +119,21 @@ void Sample::Initialize() {
 	mMotionTrack[4].mTime = 6.0f;
 	mMotionTrack[4].mValue[0] = 0; mMotionTrack[4].mValue[2] = 1;
 
-	cgltf_data* gltf = LoadGLTFFile("Assets/Woman.gltf");
+	cgltf_data* gltf = LoadGLTFFile("../../../Chapter13/Sample03/Assets/Woman.gltf");
 	mMeshes = LoadMeshes(gltf);
 	mSkeleton = LoadSkeleton(gltf);
 	mClips = LoadAnimationClips(gltf);
 	FreeGLTFFile(gltf);
 
-	gltf = LoadGLTFFile("Assets/IKCourse.gltf");
+	gltf = LoadGLTFFile("../../../Chapter13/Sample03/Assets/IKCourse.gltf");
 	mIKCourse = LoadStaticMeshes(gltf);
 	FreeGLTFFile(gltf);
-	mCourseTexture = new Texture("Assets/uv.png");
+	mCourseTexture = new Texture("../../../Chapter13/Sample03/Assets/uv.png");
 	mTriangles = MeshesToTriangles(mIKCourse);
 
-	mStaticShader = new Shader("Shaders/static.vert", "Shaders/lit.frag");
-	mSkinnedShader = new Shader("Shaders/skinned.vert", "Shaders/lit.frag");
-	mDiffuseTexture = new Texture("Assets/Woman.png");
+	mStaticShader = new Shader("../../../Chapter13/Sample03/Shaders/static.vert", "../../../Chapter13/Sample03/Shaders/lit.frag");
+	mSkinnedShader = new Shader("../../../Chapter13/Sample03/Shaders/skinned.vert", "../../../Chapter13/Sample03/Shaders/lit.frag");
+	mDiffuseTexture = new Texture("../../../Chapter13/Sample03/Assets/Woman.png");
 
 	mLeftLeg = new IKLeg(mSkeleton, "LeftUpLeg", "LeftLeg", "LeftFoot", "LeftToeBase");
 	mLeftLeg->SetAnkleOffset(0.2f);

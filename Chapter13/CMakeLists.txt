@@ -145,3 +145,81 @@ target_link_libraries(
 	CrossWindowGraphics
 	${OPENGL_LIBRARIES}
 )
+
+set(chapter13_3_SOURCES
+	Sample03/Code/XMain.mm
+	Sample03/Code/Util.mm
+    Sample03/Code/Application.h
+    Sample03/Code/Attribute.h
+    Sample03/Code/Attribute.cpp
+    Sample03/Code/Draw.h
+    Sample03/Code/Draw.cpp
+    Sample03/Code/DebugDraw.cpp
+    Sample03/Code/DebugDraw.h
+    Sample03/Code/glad.h
+    Sample03/Code/glad.c
+    Sample03/Code/IndexBuffer.h
+    Sample03/Code/IndexBuffer.cpp
+    Sample03/Code/mat4.h
+    Sample03/Code/mat4.cpp
+    Sample03/Code/quat.h
+    Sample03/Code/quat.cpp
+    Sample03/Code/Shader.h
+    Sample03/Code/Shader.cpp
+    Sample03/Code/stb_image.h
+    Sample03/Code/stb_image.cpp
+    Sample03/Code/Texture.h
+    Sample03/Code/Texture.cpp
+    Sample03/Code/Transform.h
+    Sample03/Code/Transform.cpp
+    Sample03/Code/TransformTrack.h
+    Sample03/Code/TransformTrack.cpp
+    Sample03/Code/Uniform.h
+    Sample03/Code/Uniform.cpp
+    Sample03/Code/vec2.h
+    Sample03/Code/vec3.h
+    Sample03/Code/vec3.cpp
+    Sample03/Code/vec4.h
+    Sample03/Code/cgltf.h
+    Sample03/Code/cgltf.c
+    Sample03/Code/Frame.h
+    Sample03/Code/GLTFLoader.h
+    Sample03/Code/GLTFLoader.cpp
+    Sample03/Code/Interpolation.h
+    Sample03/Code/Track.h
+    Sample03/Code/Track.cpp
+    Sample03/Code/Clip.h
+    Sample03/Code/Clip.cpp
+    Sample03/Code/Pose.h
+    Sample03/Code/Pose.cpp
+    Sample03/Code/Skeleton.cpp
+    Sample03/Code/Skeleton.h
+    Sample03/Code/Mesh.cpp
+    Sample03/Code/Mesh.h
+    Sample03/Code/RearrangeBones.cpp
+    Sample03/Code/RearrangeBones.h
+    Sample03/Code/Sample.cpp
+    Sample03/Code/Sample.h
+    Sample03/Code/CrossFadeController.cpp
+    Sample03/Code/CrossFadeController.h
+    Sample03/Code/CrossFadeTarget.h
+    Sample03/Code/Blending.cpp
+    Sample03/Code/Blending.h
+    Sample03/Code/CCDSolver.cpp
+    Sample03/Code/CCDSolver.h
+    Sample03/Code/FABRIKSolver.cpp
+    Sample03/Code/FABRIKSolver.h
+    Sample03/Code/IKLeg.cpp
+    Sample03/Code/IKLeg.h
+    Sample03/Code/Intersections.cpp
+    Sample03/Code/Intersections.h)
+
+add_executable(chapter13_3 ${chapter13_3_SOURCES})
+
+# 🔗 Link CrossWindow to your project:
+target_link_libraries(
+    chapter13_3
+    CrossWindow
+	CrossWindowGraphics
+	${OPENGL_LIBRARIES}
+)
