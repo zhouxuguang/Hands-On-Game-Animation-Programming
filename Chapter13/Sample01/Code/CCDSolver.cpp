@@ -62,6 +62,7 @@ bool CCDSolver::Solve(const Transform& target)
 		}
 
 
+		//每一步迭代就是将当前节点与末端点之间的连线方向旋转到当前节点与目标连线的方向，从倒数第二个节点开始旋转，因为最后一个节点旋转不产生影响
 		for (int j = (int)size - 2; j >= 0; --j) 
 		{
 			effector = GetGlobalTransform(last).position;

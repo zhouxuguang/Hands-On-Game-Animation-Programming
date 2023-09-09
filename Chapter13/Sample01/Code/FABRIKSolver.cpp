@@ -117,18 +117,23 @@ bool FABRIKSolver::Solve(const Transform& target) {
 	unsigned int last = size - 1;
 	float thresholdSq = mThreshold * mThreshold;
 
+	//首先将节点的变换转换为世界坐标系变换
 	IKChainToWorld();
 	vec3 goal = target.position;
 	vec3 base = mWorldChain[0];
 
 	for (unsigned int i = 0; i < mNumSteps; ++i) {
 		vec3 effector = mWorldChain[last];
+
+		//如果末端节点和目标点非常接近，将世界转换为局部的变换
 		if (lenSq(goal - effector) < thresholdSq) {
 			WorldToIKChain();
 			return true;
 		}
 
+		//反向迭代
 		IterateBackward(goal);
+		//正向迭代
 		IterateForward(base);
 	}
 
