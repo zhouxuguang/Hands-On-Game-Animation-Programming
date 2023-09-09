@@ -1,7 +1,6 @@
 #include "Clip.h"
+#include <math.h>
 
-template TClip<TransformTrack>;
-template TClip<FastTransformTrack>;
 
 template <typename TRACK>
 TClip<TRACK>::TClip() {
@@ -40,7 +39,6 @@ float TClip<TRACK>::AdjustTimeToFitRange(float inTime) {
 			inTime += mEndTime - mStartTime;
 		}
 		inTime = inTime + mStartTime;
-
 	}
 	else {
 		if (inTime < mStartTime) {
@@ -156,3 +154,6 @@ FastClip OptimizeClip(Clip& input) {
 
 	return result;
 }
+
+template class TClip<TransformTrack>;
+template class TClip<FastTransformTrack>;
