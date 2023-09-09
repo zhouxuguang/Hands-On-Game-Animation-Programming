@@ -87,26 +87,41 @@ void FABRIKSolver::WorldToIKChain() {
 
 void FABRIKSolver::IterateBackward(const vec3& goal) {
 	int size = (int)Size();
+
+	//先将最后一个节点的位置设置为目标点的位置
 	if (size > 0) {
 		mWorldChain[size - 1] = goal;
 	}
 
+	//从末端节点往前迭代
 	for (int i = size - 2; i >= 0; --i) {
+
+		//从子节点指向父节点的方向
 		vec3 direction = normalized(mWorldChain[i] - mWorldChain[i + 1]);
 		vec3 offset = direction * mLengths[i + 1];
+
+		//将当前节点往子节点方向拉
 		mWorldChain[i] = mWorldChain[i + 1] + offset;
 	}
 }
 
 void FABRIKSolver::IterateForward(const vec3& base) {
 	unsigned int size = Size();
+
+	//先将第一个节点设置为base节点
 	if (size > 0) {
 		mWorldChain[0] = base;
 	}
 
 	for (int i = 1; i < size; ++i) {
+
+		//从父节点向子节点的方向
 		vec3 direction = normalized(mWorldChain[i] - mWorldChain[i - 1]);
+
+		//沿着从父节点向子节点的方向的偏移向量
 		vec3 offset = direction * mLengths[i];
+
+		//父节点+偏移向量 即更新其节点的位置
 		mWorldChain[i] = mWorldChain[i - 1] + offset;
 	}
 }
@@ -137,6 +152,7 @@ bool FABRIKSolver::Solve(const Transform& target) {
 		IterateForward(base);
 	}
 
+	//如果迭代次数用完了，判断是否末端节点和目标点足够接近
 	WorldToIKChain();
 	vec3 effector = GetGlobalTransform(last).position;
 	if (lenSq(goal - effector) < thresholdSq) {
