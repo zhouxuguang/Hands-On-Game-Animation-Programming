@@ -6,15 +6,15 @@
 #include <iostream>
 
 void Sample::Initialize() {
-	cgltf_data* gltf = LoadGLTFFile("Assets/dq.gltf");
+	cgltf_data* gltf = LoadGLTFFile("../../../Chapter14/Sample01/Assets/dq.gltf");
 	mMeshes = LoadMeshes(gltf);
 	mSkeleton = LoadSkeleton(gltf);
 	mClips = LoadAnimationClips(gltf);
 	FreeGLTFFile(gltf);
 
-	mLBSShader = new Shader("Shaders/skinned.vert", "Shaders/lit.frag");
-	mDQShader = new Shader("Shaders/dualquaternion.vert", "Shaders/lit.frag");
-	mDiffuseTexture = new Texture("Assets/dq.png");
+	mLBSShader = new Shader("../../../Chapter14/Sample01/Shaders/skinned.vert", "../../../Chapter14/Sample01/Shaders/lit.frag");
+	mDQShader = new Shader("../../../Chapter14/Sample01/Shaders/dualquaternion.vert", "../../../Chapter14/Sample01/Shaders/lit.frag");
+	mDiffuseTexture = new Texture("../../../Chapter14/Sample01/Assets/dq.png");
 
 	mCurrentPose = mSkeleton.GetRestPose();
 
