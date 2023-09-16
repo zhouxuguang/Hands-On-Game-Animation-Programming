@@ -1,5 +1,5 @@
 #include "AnimTexture.h"
-#include "glad.h"
+#include "PreDefine.h"
 #include <cstring>
 #include <fstream>
 #include <istream>

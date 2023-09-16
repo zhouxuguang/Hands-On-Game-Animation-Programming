@@ -11,20 +11,20 @@
 //#define access _access_s
 
 void Sample::Initialize() {
-	cgltf_data* gltf = LoadGLTFFile("Assets/Woman.gltf");
+	cgltf_data* gltf = LoadGLTFFile("../../../Chapter15/Sample01/Assets/Woman.gltf");
 	mMeshes = LoadMeshes(gltf);
 	mSkeleton = LoadSkeleton(gltf);
 	mClips = LoadAnimationClips(gltf);
 	FreeGLTFFile(gltf);
 
-	mCrowdShader = new Shader("Shaders/crowd.vert", "Shaders/lit.frag");
-	mDiffuseTexture = new Texture("Assets/Woman.png");
+	mCrowdShader = new Shader("../../../Chapter15/Sample01/Shaders/crowd.vert", "../../../Chapter15/Sample01/Shaders/lit.frag");
+	mDiffuseTexture = new Texture("../../../Chapter15/Sample01/Assets/Woman.png");
 
 	unsigned int numClips = (unsigned int)mClips.size();
 	mTextures.resize(numClips);
 	mCrowds.resize(numClips);
 	for (unsigned int i = 0; i < numClips; ++i) {
-		std::string fileName = "Assets/";
+		std::string fileName = "../../../Chapter15/Sample01/Assets/";
 		fileName += mClips[i].GetName();
 		fileName += ".animTex";
 		bool fileExists = access(fileName.c_str(), 0) == 0;

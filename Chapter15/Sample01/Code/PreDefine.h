@@ -2,6 +2,8 @@
 #define PREDEFINE_INCLUDE_H
 
 #include <OpenGL/gl3.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 
 inline char const* gl_error_string(GLenum const err)
